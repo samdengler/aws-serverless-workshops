@@ -39,10 +39,10 @@ Once you've chosen a region, you should deploy all of the resources for this wor
 
 ### 1. Create a CodeStar project
 
-Use the AWS Console to create a CodeStar project called `uni-api` using the Node.js Lambda Webservice template.  Use an HTTP client to confirm that the API Gateway endpoint created by CodeStar returns the message, `{"Output":"Hello World!"}`, in it's response.
+**Goal**: Use the AWS Console to create a CodeStar project called `uni-api` using the **Node.js Lambda Webservice** template.  Use a web browser to confirm that the API Gateway endpoint created by CodeStar returns the message, `{"Output":"Hello World!"}`, in it's response.
 
 <details>
-<summary><strong>Step-by-step instructions (expand for details)</strong></summary><p>
+<summary><strong>HOW TO create a CodeStar Project (expand for details)</strong></summary><p>
 
 1. In the AWS Management Console choose **Services** then select **CodeStar** under Developer Tools.
 
@@ -96,16 +96,17 @@ Use the AWS Console to create a CodeStar project called `uni-api` using the Node
 
     ![CodeStar 10](images/codestar-10.png)
 
-1. Congratulations!  You have successfully create a serverless web service project using CodeStar.  In the next section, you will use a Git client to clone the repository to your workstation.
-
 </p></details>
+<p>
+
+Congratulations!  You have successfully create a serverless web service project using CodeStar.  In the next section, you will use a Git client to clone the repository to your workstation.
 
 ## Clone CodeCommit Git Repository
 
-From the CodeStar project dashboard for the `uni-api`, find the CodeCommit instructions to clone the Git repository to your local workstation.
+**Goal:** From the CodeStar dashboard for the `uni-api` project, find the CodeCommit instructions to clone the Git repository to your local workstation.
 
 <details>
-<summary><strong>Step-by-step instructions (expand for details)</strong></summary><p>
+<summary><strong>HOW TO clone the CodeCommit git repository (expand for details)</strong></summary><p>
 
 1. In the upper right corner of the CodeStar project dashboard browser window, click the **Connect Tools** button.
 
@@ -119,10 +120,13 @@ From the CodeStar project dashboard for the `uni-api`, find the CodeCommit instr
 
     ![CodeStar 12](images/codestar-12.png)
 
-1. Congratulations!  You have successfully cloned the `uni-api` project to your local workstation.  In future modules, you will use this local version to commit changes to the source code, push them to the project Git repository, and trigger automatic execution of the project's continuous delivery pipeline.
-
 </p></details>
+<p>
+
+Congratulations!  You have successfully cloned the `uni-api` project to your local workstation.  In future modules, you will use this local version to commit changes to the source code, push them to the project Git repository, and trigger automatic execution of the project's continuous delivery pipeline.
+
+
 
 ## Completion
 
-Congratulations!  You have successfully created a CodeStar project, tested the sample REST API, and cloned the project Git repository to your workstation.  In the next [Serverless Application Model (SAM) Module](../1_ServerlessApplicationModel), you will learn more about SAM and how to use it change and deploy the API.
+You have successfully created a CodeStar project, tested the sample REST API, and cloned the project Git repository to your workstation.  In the next [Serverless Application Model (SAM) Module](../1_ServerlessApplicationModel), you will learn more about SAM and how to use it test your API on your workstation.
