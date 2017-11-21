@@ -65,7 +65,7 @@ Below is an image depicting the CodePipeline upon completion:
 
 ![Wild Rydes Unicorn API Continuous Delivery Pipeline](images/codepipeline-final.png)
 
-## Implementation Instructions
+## Environment Setup
 
 Each of the following sections provide an implementation overview and detailed, step-by-step instructions. The overview should provide enough context for you to complete the implementation if you're already familiar with the AWS Management Console or you want to explore the services yourself without following a walkthrough.
 
