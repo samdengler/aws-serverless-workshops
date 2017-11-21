@@ -12,35 +12,6 @@ Parameters:
     Description: AWS CodeStar projectID used to associate new resources to team members
 
 Resources:
-  Table:
-    Type: 'AWS::Serverless::SimpleTable'
-    Properties:
-      PrimaryKey:
-         Name: name
-         Type: String
-
-  ReadFunction:
-    Type: 'AWS::Serverless::Function'
-    Properties:
-      FunctionName: 'uni-api-read'
-      Runtime: nodejs6.10
-      CodeUri: app
-      Handler: read.lambda_handler
-      Description: View Unicorn by name
-      Timeout: 10
-      Events:
-        GET:
-          Type: Api
-          Properties:
-            Path: /unicorns/{name}
-            Method: get
-      Environment:
-        Variables:
-          TABLE_NAME: !Ref Table
-      Role:
-        Fn::ImportValue:
-          !Join ['-', [!Ref 'ProjectId', !Ref 'AWS::Region', 'LambdaTrustRole']]
-
   ListFunction:
     Type: 'AWS::Serverless::Function'
     Properties:
@@ -56,9 +27,6 @@ Resources:
           Properties:
             Path: /unicorns
             Method: get
-      Environment:
-        Variables:
-          TABLE_NAME: !Ref Table
       Role:
         Fn::ImportValue:
           !Join ['-', [!Ref 'ProjectId', !Ref 'AWS::Region', 'LambdaTrustRole']]
