@@ -29,7 +29,7 @@ var build_unicorn = function(event) {
 
 var build_response = function(data) {
   return {
-    statusCode: data.Item ? 200 : 404,
+    statusCode: data.Item ? 200 : 500,
     body: JSON.stringify(data.Item || {})
   };
 };

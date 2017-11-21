@@ -70,7 +70,7 @@ Resources:
       Runtime: nodejs6.10
       CodeUri: app
       Handler: update.lambda_handler
-      Description: Update Unicorn
+      Description: Updates a unicorn
       Timeout: 10
       Events:
         PUT:
@@ -84,3 +84,4 @@ Resources:
       Role:
         Fn::ImportValue:
           !Join ['-', [!Ref 'ProjectId', !Ref 'AWS::Region', 'LambdaTrustRole']]
+              
