@@ -10,7 +10,7 @@ In this module you'll use the [AWS CodeStar](https://aws.amazon.com/codestar/) s
 
 ## CodeStar Overview
 
-<insert here>
+AWS CodeStar is a cloud-based service for creating, managing, and working with software development projects on AWS. You can quickly develop, build, and deploy applications on AWS with an AWS CodeStar project. An AWS CodeStar project creates and integrates AWS services for your project development toolchain. Depending on your choice of AWS CodeStar project template, that toolchain might include source control, build, deployment, virtual servers or serverless resources, and more.
 
 ## Environment Setup
 
@@ -39,7 +39,7 @@ Once you've chosen a region, you should deploy all of the resources for this wor
 
 ### 1. Create a CodeStar project
 
-**Goal**: Use the AWS Console to create a CodeStar project called `uni-api` using the **Node.js Lambda Webservice** template.  Use a web browser to confirm that the API Gateway endpoint created by CodeStar returns the message, `{"Output":"Hello World!"}`, in it's response.
+**Goal**: Use the AWS Console to create a CodeStar project called `uni-api` using the **Node.js Lambda Webservice** template.  Use a web browser to confirm that the API Gateway endpoint created by CodeStar returns the message, `{"Output":"Hello World!"}`, in its response.
 
 <details>
 <summary><strong>HOW TO create a CodeStar Project (expand for details)</strong></summary><p>
