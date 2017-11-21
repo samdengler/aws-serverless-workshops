@@ -127,8 +127,10 @@ Now that the CodeCommit Git repository has been seeded with new source code, you
 
 Using your preferred Git client, run the commands on your local `uni-api` Git repository:
 
-* `git fetch --all`
-* `git reset --hard origin/master`
+```bash
+git fetch --all
+git reset --hard origin/master
+```
 
 
 ## SAM Local
@@ -210,11 +212,11 @@ If you're unable to install SAM Local on your workstation, you may find it easie
     npm install -g aws-sam-local    
     ```
 
-Verify the installation worked:
+1. Verify the installation worked:
 
-```bash
-sam --version
-```
+   ```bash
+   sam --version
+   ```
 
 
 ###### Setup Port Forwarding Configuration
@@ -223,36 +225,36 @@ SAM Local can start an HTTP server locally on EC2 instance on port 3000.  In ord
 
 ###### Port Forwarding with Putty on Windows
 
-In your putty configuration, select **Connection** , **SSH** , **Tunnels** and add a mapping:
+1. In your putty configuration, select **Connection** , **SSH** , **Tunnels** and add a mapping:
 
-```
-Source port: 3000
+   ```
+   Source port: 3000
+   
+   Destination: 127.0.0.1:3000
+   ```
 
-Destination: 127.0.0.1:3000
-```
+   The configuration should look like this:
 
-The configuration should look like this:
-
-![Putty Tunnel Config](images/putty-tunnel-config.png)
+   ![Putty Tunnel Config](images/putty-tunnel-config.png)
 
 
 ###### Port Forwarding with Bitvise SSH Client on Windows
 
-In **Profile** window, select **C2S** tab, create an entry with this configuration:
+1. In **Profile** window, select **C2S** tab, create an entry with this configuration:
 
-```
-Listen Interface: 127.0.0.1
+   ```
+   Listen Interface: 127.0.0.1
+   
+   List. Port: 3000
+   
+   Destination Host: localhost
+   
+   Dest. Port: 3000
+   ```
 
-List. Port: 3000
+   C2S configuration should look similar to this:
 
-Destination Host: localhost
-
-Dest. Port: 3000
-```
-
-C2S configuration should look similar to this:
-
-![Bitvise Tunnel Config](images/bitvise-tunnel-config.png)
+   ![Bitvise Tunnel Config](images/bitvise-tunnel-config.png)
 
 </details>
 
@@ -263,17 +265,21 @@ In this section, you will use SAM Local on your workstation to run the Unicorn A
 
 ### Run API Gateway locally
 
-From your **`uni-api`** directory, run the command `sam local start-api` to spawn a local API Gateway to test HTTP request/response functionality. Features hot-reloading to allow you to quickly develop, and iterate over your functions.
+1. From the **`uni-api`** directory, run the following command:
 
-**`sam`** will automatically find any functions within your SAM template that have `Api` event sources defined, and mount them at the defined HTTP paths.
+   ```bash
+   sam local start-api
+   ```
 
-If this is your first time running SAM Local, there will be a delay as the Docker images are downloaded.  Once successful, you should see output similar to the screenshot below:
+   This will spawn a local API Gateway to test HTTP request/response functionality. Features hot-reloading to allow you to quickly develop, and iterate over your functions.  **`sam`** will automatically find any functions within your SAM template that have `Api` event sources defined, and mount them at the defined HTTP paths.
 
-![start-api output](images/start-api-output.png)
+   If this is your first time running SAM Local, there will be a delay as the Docker images are downloaded.  Once successful, you should see output similar to the screenshot below:
 
-Open a browser and enter `http://127.0.0.1:3000/unicorns` in the address bar.  Confirm that you see the output below:
+   ![start-api output](images/start-api-output.png)
 
-![Hello World in Browser](images/browser-hello-world.png)
+1. Open a browser and enter `http://127.0.0.1:3000/unicorns` in the address bar.  Confirm that you see the output below:
+
+   ![Hello World in Browser](images/browser-hello-world.png)
 
 Congratulations!  You have successfully used SAM Local to start a local development environment.
 
@@ -298,7 +304,9 @@ HOW TO update code and verify results (expand for details)
 </details>
 <p>
 
-Congratulations!  You've successfully test changes to a Lambda function in a local development environment.  To learn more about development with SAM Local, check out [AWS Documentation](http://docs.aws.amazon.com/lambda/latest/dg/test-sam-local.html) and SAM Local [GitHub repository](https://github.com/awslabs/aws-sam-local).  
+Congratulations!  You've successfully test changes to a Lambda function in a local development environment.  You may now kill the SAM Local running process.
+
+To learn more about development with SAM Local, check out [AWS Documentation](http://docs.aws.amazon.com/lambda/latest/dg/test-sam-local.html) and SAM Local [GitHub repository](https://github.com/awslabs/aws-sam-local).  
 
 ## Completion
 
