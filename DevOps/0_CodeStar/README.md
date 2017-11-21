@@ -112,11 +112,11 @@ Congratulations!  You have successfully create a serverless web service project 
 
     ![CodeStar 11](images/codestar-11.png)
     
-    If you've used CodeStar before, the link to **Connect** is also available in the bottom left corner of the **Commit* project tile.
+    You can also click the **Connect** button in the bottom left corner of the **Commit history** project tile.
     
     ![CodeStar 11](images/codestar-11b.png)
     
-1. You can select instructions to clone the CodeCommit respository using **Visual Studio**, **Eclipse**, or **Command line tools**.  There are instructions for **macOS**, **Windows**, and **Linux** operating systems, as well as **HTTPS** and **SSH** access methods.  Follow the instructions to clone the Git repository to your local workstation.
+1. You can select instructions to clone the CodeCommit respository using **Visual Studio**, **Eclipse**, or **Command line tools**.  Click **See instructions** for instructions for cloning to **macOS**, **Windows**, and **Linux** operating systems.
 
     ![CodeStar 12](images/codestar-12.png)
 
