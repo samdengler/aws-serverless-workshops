@@ -149,6 +149,8 @@ Using a text editor, open the `template.yml` file and append a new **AWS::Server
 </details>
 <p>
 
+Now that you've updated the the SAM template with the changes, use Git to commit the changes and push them to remote repository.  This will trigger CodePipeline to build and deploy your changes in AWS.
+
 ### 2. Commit the change to local Git repository
 
 1. Using your Git client, add the local changes to the Git index, and commit with a message.  For example:
@@ -166,7 +168,13 @@ Using a text editor, open the `template.yml` file and append a new **AWS::Server
 
 ### 3. Confirm CodePipeline Completion
 
-After pushing your changes to the CodeStar project's CodeCommit git repository, you will confirm that the changes are build and deployed successfully using CodePipeline.
+**Goal**: After pushing your changes to your CodeCommit Git repository, use the AWS CodeStar Console to monitor and confirm that the changes are successfully built and deployed using CodePipeline.
+
+<details>
+<summary><strong>
+HOW TO use the CodeStar Console to monitor CodePipeline (expand for details)
+</strong></summary>
+<p>
 
 1. In the AWS Management Console choose **Services** then select **CodeStar** under Developer Tools.
 
@@ -181,7 +189,10 @@ After pushing your changes to the CodeStar project's CodeCommit git repository, 
 1. Each stage's color will turn blue during execution and green on completion.  Following the successful execution of all stages, the pipeline should look like the following screenshot.
 
     ![CodeStar Dashboard 2](images/codestar-3.png)
+</details>
+<p>
 
+Congratulations, your changes were successfully built and deployed using CodePipeline.  Next, let's validate that you're able to use the API to add a Unicorn to the Wild Rydes Stable.
 
 ## Enhancement Validation
 
@@ -217,6 +228,8 @@ After the CloudFormation deploy command completes, you will use the AWS API Gate
 1. Scroll to the top of the test page, and verify that on the right side of the panel that the **Status** code of the HTTP response is 200.
 
     ![Validate 3](images/validate-3.png)
+
+Congratulations, you have used the API to successfully add a Unicorn.  Next, use the API to list the Unicorns and confirm Shadowfox is included.
 
 ### 2. List Unicorns
 
@@ -286,9 +299,9 @@ Having this testing framework in place ensures that the exact same set of steps 
 1. Using your Git client, add the local changes to the Git index, commit these changes with a message, and push our local changes to the repository. For example:
 
     ```
-    %> git add -u
-    %> git commit -m "Enabled unit tests and fixed issues."
-    %> git push
+    git add -u
+    git commit -m "Enabled unit tests and fixed issues."
+    git push
     ```
     
 ### 4. Verify the tests are run during the build
