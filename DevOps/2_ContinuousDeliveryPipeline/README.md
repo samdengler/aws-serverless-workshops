@@ -72,80 +72,99 @@ Now that the CodeCommit Git repository has been seeded with new source code, you
 
 Using your preferred Git client, run the commands on your local **uni-api** Git repository:
 
-* `git fetch --all`
-* `git reset --hard origin/master`
+```bash
+git fetch --all
+git reset --hard origin/master
+```
 
-### 3. Add Delete Function to template.yml
+Congratulations, your environment setup is complete!
 
-Using a text editor, open the `template.yml` file and append a new **AWS::Serverless::Function** Resource labeled `DeleteFunction` that has the following definition.
+
+## API Enhancement
+
+Let's enhance the API with the ability to create or update a Unicorn in the Wild Rydes stables.  The code to do so is already present in the project, so you need to add an **AWS::Serverless::Function** resource in the SAM `template.yml` template.
+
+### 1. Add Update Function to template.yml
+
+**Goal**: Using the `AWS::Serverless::Function` definitions in the `template.yml` file as examples, add a new Serverless Function named **uni-api-update** to the `template.yml` SAM template.  The function should invoke the **lambda_handler** method in the **`app/update.js`** file when triggered by an **Api** event to the URL path **/unicorns/{name}** using the HTTP **put** method.
+
+<details>
+<summary><strong>
+HOW TO update template.yml with uni-api-update Lambda function (expand for details)
+</strong></summary>
+<p>
+
+Using a text editor, open the `template.yml` file and append a new **AWS::Serverless::Function** Resource labeled `UpdateFunction` that has the following definition.
 
 > Note: whitespace is important in YAML files.  Please verify that the configuration below is added with the same space indentation as the CloudFormation Resources in the template.yml file.
 
-1. **FunctionName** is `uni-api-delete`
+1. **FunctionName** is `uni-api-update`
 
 1. **Runtime** is `nodejs6.10`
 
 1. **CodeUri** is `app`
 
-1. **Handler** is `delete.lambda_handler`
+1. **Handler** is `update.lambda_handler`
 
-1. **Description** is `Delete a Unicorn`
+1. **Description** is `Update a Unicorn`
 
 1. **Timeout** is `10`
 
-1. **Event** type is `Api` associated to the `/unicorns/{name}` **Path** and `delete` **Method**
+1. **Event** type is `Api` associated to the `/unicorns/{name}` **Path** and `put` **Method**
 
 1. **Environment** variable named `TABLE_NAME` that references the `Table` Resource for its value.
 
 1. **Role** is duplicated from another function.
 
-If you are unsure of the syntax to add to ``template.yml`` please refer to the code snippet below.
+   If you are unsure of the syntax to add to ``template.yml`` please refer to the code snippet below.
 
-<details>
-<summary><strong>template.yml additions to support Delete function (expand for details)</strong></summary><p>
+   <details>
+   <summary><strong>template.yml additions to support Update function (expand for details)</strong></summary><p>
 
-```yaml
-  DeleteFunction:
-    Type: 'AWS::Serverless::Function'
-    Properties:
-      FunctionName: 'uni-api-delete'
-      Runtime: nodejs6.10
-      CodeUri: app
-      Handler: delete.lambda_handler
-      Description: Delete Unicorn
-      Timeout: 10
-      Events:
-        DELETE:
-          Type: Api
-          Properties:
-            Path: /unicorns/{name}
-            Method: delete
-      Environment:
-        Variables:
-          TABLE_NAME: !Ref Table
-      Role:
-        Fn::ImportValue:
-          !Join ['-', [!Ref 'ProjectId', !Ref 'AWS::Region', 'LambdaTrustRole']]
-```
+   ```yaml
+     UpdateFunction:
+       Type: 'AWS::Serverless::Function'
+       Properties:
+         FunctionName: 'uni-api-update'
+         Runtime: nodejs6.10
+         CodeUri: app
+         Handler: update.lambda_handler
+         Description: Update Unicorn
+         Timeout: 10
+         Events:
+           DELETE:
+             Type: Api
+             Properties:
+               Path: /unicorns/{name}
+               Method: put
+         Environment:
+           Variables:
+             TABLE_NAME: !Ref Table
+         Role:
+           Fn::ImportValue:
+             !Join ['-', [!Ref 'ProjectId', !Ref 'AWS::Region', 'LambdaTrustRole']]
+   ```
+   </details>
+   
+</details>
+<p>
 
-</p></details>
-
-### 4. Commit the change to local Git repository
+### 2. Commit the change to local Git repository
 
 1. Using your Git client, add the local changes to the Git index, and commit with a message.  For example:
 
     ```
-    %> git add .
-    %> git commit -m "Add delete function"
+    git add .
+    git commit -m "Add update function"
     ```
 
 1. Using your Git client, push the Git repository updates to the origin.  For example:
 
     ```
-    %> git push origin
+    git push origin
     ```
 
-### 5. Confirm CodePipeline Completion
+### 3. Confirm CodePipeline Completion
 
 After pushing your changes to the CodeStar project's CodeCommit git repository, you will confirm that the changes are build and deployed successfully using CodePipeline.
 
@@ -163,19 +182,33 @@ After pushing your changes to the CodeStar project's CodeCommit git repository, 
 
     ![CodeStar Dashboard 2](images/codestar-3.png)
 
-### 6. Test Delete API Method
+
+## Enhancement Validation
+
+After the CloudFormation deploy command completes, you will use the AWS API Gateway to test your API.
+
+### 1. Add a Unicorn
 
 1. In the AWS Management Console, click **Services** then select **API Gateway** under Application Services.
 
 1. In the left nav, click on `awscodestar-uni-api-lambda`.
 
-1. From the list of API resources, click on the `DELETE` link under the `/{name}` resource.
+1. From the list of API resources, click on the `PUT` link under the `/{name}` resource.
 
 1. On the resource details panel, click the `TEST` link in the client box on the left side of the panel.
 
     ![Validate 1](images/validate-1.png)
 
 1. On the test page, enter `Shadowfox` in the **Path** field.
+
+1. Scroll down the test page and enter the following as the **Request Body**:
+
+    ```json
+    {
+      "breed": "Brown Jersey",
+      "description": "Shadowfox joined Wild Rydes after completing a distinguished career in the military, where he toured the world in many critical missions. Shadowfox enjoys impressing his ryders with magic tricks that he learned from his previous owner."
+    }
+    ```
 
     ![Validate 2](images/validate-2.png)
 
@@ -184,6 +217,8 @@ After pushing your changes to the CodeStar project's CodeCommit git repository, 
 1. Scroll to the top of the test page, and verify that on the right side of the panel that the **Status** code of the HTTP response is 200.
 
     ![Validate 3](images/validate-3.png)
+
+### 2. List Unicorns
 
 1. In the AWS Management Console choose **Services** then select **CodeStar** under Developer Tools.
 
@@ -197,7 +232,8 @@ After pushing your changes to the CodeStar project's CodeCommit git repository, 
 
 1. Paste the URL in a browser window and append `/unicorns` to the path and hit enter.  For example: `https://xxxxxxxxxx.execute-api.us-east-1.amazonaws.com/Prod/unicorns/`
 
-1. Confirm that the browser shows a JSON result that no longer includes `Shadowfox` in the list of Unicorns.
+1. Confirm that the browser shows a JSON result that includes `Shadowfox`, with the breed and description entered above.
+
 
 ## Unit Testing our API
 
