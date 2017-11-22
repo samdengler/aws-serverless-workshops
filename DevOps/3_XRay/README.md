@@ -6,8 +6,8 @@ In this module, you'll use [AWS X-Ray](https://aws.amazon.com/xray/) to analyze 
 The work you will do is divided up into 3 phases:  
 
 1. **[Environment Setup](#environment-setup)**
-2. **Problem 1: [Error Discovery Using X-Ray](problem-1-error-discovery-using-x-ray)** and **[Resolution](#problem-1-resolution)**
-3. **Problem 2: [Performance Discovery Using-X-Ray](problem-2-performance-discovery-using-x-ray)** and **[Resolution](#problem-2-resolution)**
+2. **Problem 1: [Error Discovery Using X-Ray](#problem-1-error-discovery-using-x-ray)** and **[Resolution](#problem-1-resolution)**
+3. **Problem 2: [Performance Discovery Using-X-Ray](#problem-2-performance-discovery-using-x-ray)** and **[Resolution](#problem-2-resolution)**
 
 But first, a quick intro to AWS X-Ray...
 
@@ -64,7 +64,7 @@ As you can see, the basic X-Ray integration into Lambda requires only two change
 
 ## Environment Setup
 
-In order to tacke [Problem 1: Error Discovery Using X-Ray](problem-1-error-discovery-using-x-ray) and [Problem 2: Performance Discovery Using-X-Ray](problem-2-performance-discovery-using-x-ray), you must make a few IAM Policy changes and clone a seed the project repository using the steps below.
+In order to tacke [Problem 1: Error Discovery Using X-Ray](#problem-1-error-discovery-using-x-ray) and [Problem 2: Performance Discovery Using-X-Ray](#problem-2-performance-discovery-using-x-ray), you must make a few IAM Policy changes and clone a seed the project repository using the steps below.
 
 
 
