@@ -7,11 +7,12 @@ describe("Reading Unicorns", function () {
     const TABLE_NAME = 'UnicornsTable';
     const UNICORN_NAME = 'FakeName';
 
-    let aws = null;
-    let lambda = null;
+    var aws = null;
+    var lambda = null;
+
     before(()=> {
         process.env.TABLE_NAME = TABLE_NAME;
-        
+
         // Create a mock DDB backend
         aws = proxyquire(PATH_TO_MODULE_UNDER_TEST, {
             'aws-sdk' :{
@@ -21,10 +22,10 @@ describe("Reading Unicorns", function () {
                             "get": (params, callback) => {
                                 console.log(JSON.stringify(params))
                                 assert.equal(params.TableName, TABLE_NAME);
-                                let item = null;
+                                var item = null;
                                 if (params.Key.name == UNICORN_NAME)
                                 {
-                                    item = { 
+                                    item = {
                                         "breed": "Test Breed",
                                         "description": "This is a test unicorn. There are infinitely many like it, but this one is ours.",
                                         "name": "Testy"
@@ -43,14 +44,14 @@ describe("Reading Unicorns", function () {
     });
 
     it("reads existing unicorn data", function (done) {
-        lambda.lambda_handler({ 
-            "resource": "unicorns", 
-            "httpMethod": "GET", 
-            "pathParameters" : { 
-                "name": UNICORN_NAME 
-            } 
-        }, 
-        {}, 
+        lambda.lambda_handler({
+            "resource": "unicorns",
+            "httpMethod": "GET",
+            "pathParameters" : {
+                "name": UNICORN_NAME
+            }
+        },
+        {},
         (err, response) => {
             // Check whether we received any error information
             assert.ifError(err);
@@ -61,14 +62,14 @@ describe("Reading Unicorns", function () {
     });
 
     it("errors on missing unicorn data", function (done) {
-        lambda.lambda_handler({ 
-            "resource": "unicorns", 
-            "httpMethod": "GET", 
-            "pathParameters" : { 
-                "name": "MissingUnicorn" 
-            } 
-        }, 
-        {}, 
+        lambda.lambda_handler({
+            "resource": "unicorns",
+            "httpMethod": "GET",
+            "pathParameters" : {
+                "name": "MissingUnicorn"
+            }
+        },
+        {},
         (err, response) => {
             // Check whether we received any error information
             assert.ifError(err);

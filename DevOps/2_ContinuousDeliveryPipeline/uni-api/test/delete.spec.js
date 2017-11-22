@@ -6,9 +6,9 @@ describe("Deleting Unicorns", function () {
     const PATH_TO_MODULE_UNDER_TEST = '../app/delete';
     const TABLE_NAME = 'UnicornsTable';
     const UNICORN_NAME = 'FakeName';
-    
-    let aws = null;
-    let lambda = null;
+
+    var aws = null;
+    var lambda = null;
 
     before(() => {
         process.env.TABLE_NAME = TABLE_NAME;
@@ -35,15 +35,15 @@ describe("Deleting Unicorns", function () {
     });
 
     it("deletes unicorn data", function (done) {
-        lambda.lambda_handler({ 
-            "resource": "unicorns", 
-            "httpMethod": "DELETE", 
-            "pathParameters" : 
-            { 
-                "name" : UNICORN_NAME 
-            } 
-        }, 
-        {}, 
+        lambda.lambda_handler({
+            "resource": "unicorns",
+            "httpMethod": "DELETE",
+            "pathParameters" :
+            {
+                "name" : UNICORN_NAME
+            }
+        },
+        {},
         (err, response) => {
             // Check whether we received any error information
             assert.ifError(err);

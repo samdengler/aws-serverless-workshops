@@ -4,7 +4,7 @@ In this module, you'll use [AWS CodePipeline](https://aws.amazon.com/codepipelin
 
 ## CodePipeline Overview
 
-CodePipeline orchestrates the steps to build, test, and deploy your code changes.  Below is a screenshot of the CodePipeline you will build when have completed this module.
+CodePipeline orchestrates the steps to build, test, and deploy your code changes.  Below is a screenshot of the CodePipeline created by the CodeStar project.
 
 ![Wild Rydes Unicorn API Continuous Delivery Pipeline](images/codepipeline-final.png)
 
@@ -12,7 +12,7 @@ CodePipeline orchestrates the steps to build, test, and deploy your code changes
 
 CodeBuild compiles source code, runs tests, and produces software packages that are ready to deploy to environments.
 
-The Unicorn API [buildspec.yml](buildspec.yml) defines the commands used to build the project and the output artifacts.
+The Unicorn API [buildspec.yml](uni-api/buildspec.yml) defines the commands used to build the project and the output artifacts.
 
 ```yaml
 version: 0.1
@@ -29,11 +29,9 @@ artifacts:
     - template-export.yml
 ```
 
-For the Unicorn API, the build command is the same **CloudFormation package** command used from the [Serverless Application Model: Step 2](../1_ServerlessApplicationModel#2-package-the-uni-api-for-deployment), except that the S3 bucket has been externalized to an environment variable that CodeStar has configured on the project.
+The **CloudFormation [package](http://docs.aws.amazon.com/cli/latest/reference/cloudformation/package.html)** command zips the local source code, uploads it to S3, and returns a new CloudFormation template that has been modified to use the S3 references as the CodeUri.
 
-As a reminder, the **CloudFormation package** command packages the local source code, uploads it to S3, and returns a new CloudFormation template that has been modified to use the S3 references as the CodeUri.
-
-For the Unicorn API, the output artifact is a zip archive that includes only the ``template-export.yml`` file.
+For the Unicorn API, the output artifact is a zip archive that includes only the `template-export.yml` file.
 
 ## Environment Setup
 
@@ -70,7 +68,7 @@ If you're using the latest version of the Chrome, Firefox, or Safari web browser
 
 Now that the CodeCommit Git repository has been seeded with new source code, you will need to fetch the changes locally so that you may modify the code.  Typically, this is accomplished using the `git pull` command, however for the workshop we have replaced the repository with a new history and different Git commands will be used.
 
-Using your preferred Git client, run the commands on your local **uni-api** Git repository:
+Using your preferred Git client, run the commands from your local **uni-api** directory:
 
 ```bash
 git fetch --all
@@ -86,7 +84,7 @@ Let's enhance the API with the ability to create or update a Unicorn in the Wild
 
 ### 1. Add Update Function to template.yml
 
-**Goal**: Using the `AWS::Serverless::Function` definitions in the `template.yml` file as examples, add a new Serverless Function named **uni-api-update** to the `template.yml` SAM template.  The function should invoke the **lambda_handler** method in the **`app/update.js`** file when triggered by an **Api** event to the URL path **/unicorns/{name}** using the HTTP **put** method.
+**Goal**: Using the `AWS::Serverless::Function` definitions in the `template.yml` file as examples, add a new Serverless Function named **uni-api-update** to the `template.yml` SAM template.  The function should invoke the **lambda_handler** method in the **`app/update.js`** file when triggered by an **Api** event to the URL path **/unicorns/{name}** using the HTTP **put** method.  The function will required an environment variable, named **TABLE_NAME** that has a value referring to the `AWS::Serverless::SimpleTable` defined in the template.
 
 <details>
 <summary><strong>
@@ -155,14 +153,14 @@ Now that you've updated the the SAM template with the changes, use Git to commit
 
 1. Using your Git client, add the local changes to the Git index, and commit with a message.  For example:
 
-    ```
-    git add .
+    ```bash
+    git add -u
     git commit -m "Add update function"
     ```
 
 1. Using your Git client, push the Git repository updates to the origin.  For example:
 
-    ```
+    ```bash
     git push origin
     ```
 
@@ -229,7 +227,7 @@ After the CloudFormation deploy command completes, you will use the AWS API Gate
 
     ![Validate 3](images/validate-3.png)
 
-Congratulations, you have used the API to successfully add a Unicorn.  Next, use the API to list the Unicorns and confirm Shadowfox is included.
+Congratulations, you have used the API to successfully add a Unicorn!  Next, use the API to list the Unicorns and confirm Shadowfox is included.
 
 ### 2. List Unicorns
 
@@ -256,7 +254,7 @@ The repository you cloned in the steps above already include a set of tests that
 
 ### 1. Install the testing tools and run our unit test 
 
-1. Change directory to your local **uni-api** Git repository if you aren't already there.
+1. Change directory to your local **uni-api** directory, if you aren't already there.
 
 1. Install the development tools needed to run unit tests using Node Package Manager:
 
@@ -270,11 +268,21 @@ The repository you cloned in the steps above already include a set of tests that
     node_modules/.bin/mocha
     ```
 
-Our suite of tests will then run, and we will discover that there's an issue in our code! One of our Lambda functions is not returning the correct response when we attempt to read a non-exitent unicorn's data.
+    Our suite of tests will then run, and we will discover that there's an issue in our code! One of our Lambda functions is not returning the correct response when we attempt to read a non-exitent unicorn's data.
+    
+    ![Failed tests](images/failed-tests.png)
 
-### 2. Fix our unit test failures.
+### 2. Fix unit test failures
 
-Let's examine the output of our test run. We see that the test expected that we would return the standard "404" error code if we attempted to read a unicorn that did not exist in the system, and instead our Lambda code returns a "500." Let's fix that.
+Let's examine the output of our test run. We see that the test expected that we would return the standard "404" error code if we attempted to read a unicorn that did not exist in the system, and instead our Lambda code returns a "500."
+
+**Goal**: Correct code bug in `app/read.js`, run unit tests, and verify the tests pass.
+
+<details>
+<summary><strong>
+HOW TO correct code bug and verify passing unit test (expand for details)
+</strong></summary>
+<p>
 
 1. Using a text editor, open `app/read.js` and navigate to the end where we construct our response. We will see that, where we specify the status code to return, we use the existence of a retured item to determine whether we return a 200 (OK) or a 500 (server error) code.
 
@@ -288,6 +296,14 @@ Let's examine the output of our test run. We see that the test expected that we 
 
 1. Verify that there are no errors reported by our test run.
 
+   ![Passing tests](images/passing-tests.png)
+
+</details>
+<p>
+
+Congratuations, you've successfully corrected the code bug!  Next, let's look at how to run these tests as part of CodePipeline.
+
+
 ### 3. Ensure our tests are run during our builds
 
 Having this testing framework in place ensures that the exact same set of steps are run every time we test our code. However, we are still running this test manually. Let's configure our CodeBuild environment to run these tests for us every time a build is performed.
@@ -298,32 +314,40 @@ Having this testing framework in place ensures that the exact same set of steps 
 
 1. Using your Git client, add the local changes to the Git index, commit these changes with a message, and push our local changes to the repository. For example:
 
-    ```
+    ```bash
     git add -u
-    git commit -m "Enabled unit tests and fixed issues."
+    git commit -m "Enabled unit tests and fixed issues"
     git push
     ```
     
 ### 4. Verify the tests are run during the build
 
-1. In the AWS Management Console, click **Services** then select **CodeStar** under Application Services.
+1. In the AWS Management Console choose **Services** then select **CodeStar** under Developer Tools.
 
-1. In the list of projects, select the `uni-api` project by clicking its name.
+1. Select the `uni-api` project
 
-1. In the dashboard view that is presented to you, scroll down until you can see the "Continuous Deployment" tile.
+    ![CodeStar Project List](images/codestar-1.png)
 
-1. Ensure that the most recent execution of the Build step took place after you committed the code in the steps above. If you have just committed your changes it may take a few minutes for your changes to be detected and executed.
+1. Scroll down to the "Commit history" tile and verify that you see the commit message that you entered above, for example "Enabled unit tests and fixed issues".
+
+    ![CodeStar Commit](images/codestar-commit.png)
+
+1. Monitor the "Continuous Deployment" pipeline to ensure that the most recent execution of the Build step took place after you committed the code in the steps above. If you have just committed your changes it may take a few minutes for your changes to be detected and executed.
 
 1. Once the Build step has completed, click the `CodeBuild` link inside the step to view the CodeBuild project and build history.
 
-1. Scroll down to the "Build History" section.
+    ![CodeStar Build](images/codestar-codebuild.png)
 
-1. Click the entry for the most recent build to view the details of the build.
+1. Scroll down to the "Build History" section, and click the entry for the most recent build to view the details of the build.
 
-1. Scroll down to the Build logs section.
+    ![CodeStar Build](images/codebuild-history.png)
 
-1. Inspect the build log, looking for a section that begins with `Running command mocha` and reports the results of the test pass (should be `5 passing`).
+1. Scroll down to the Build logs section, and inspect the build log, looking for a section that begins with `Running command mocha` and reports the results of the test pass (should be `5 passing`).
+
+    ![CodeStar Build](images/codebuild-logs.png)
+
+Congratulations, you have successfully integrated unit tests into your continuous delivery process!
 
 ## Completion
 
-Congratulations!  You have successfully created a Continuous Delivery Pipeline using CodePipeline to automate the deployment of the Unicorn API. In the next [X-Ray Module](../3_XRay), you will integrate AWS X-Ray to demonstrate how to troubleshoot the Unicorn API.
+You have successfully used a Continuous Delivery Pipeline using CodePipeline to automate the deployment of the Unicorn API. In the next [X-Ray Module](../3_XRay), you will integrate AWS X-Ray to demonstrate how to troubleshoot the Unicorn API.

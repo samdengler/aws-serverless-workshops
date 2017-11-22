@@ -7,10 +7,9 @@ describe("Listing Unicorns", function () {
     const TABLE_NAME = 'UnicornsTable';
     process.env.TABLE_NAME = TABLE_NAME;
 
-    let aws = null;
-    // Load our Lambda
-    let lambda = null;
-        
+    var aws = null;
+    var lambda = null;
+
     before(() => {
         // Create a mock DDB backend
         aws = proxyquire(PATH_TO_MODULE_UNDER_TEST, {
@@ -48,11 +47,11 @@ describe("Listing Unicorns", function () {
     });
 
     it("lists unicorn data", function (done) {
-        lambda.lambda_handler({ 
-            "resource": "unicorns", 
+        lambda.lambda_handler({
+            "resource": "unicorns",
             "httpMethod": "GET"
-        }, 
-        {}, 
+        },
+        {},
         (err, response) => {
             // Check whether we received any error information
             assert.ifError(err);

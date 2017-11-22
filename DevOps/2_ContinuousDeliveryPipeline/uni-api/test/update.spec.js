@@ -8,9 +8,9 @@ describe("Updating Unicorns", function () {
     const UNICORN_NAME = 'FakeName';
     const UNICORN_BREED = 'Testy';
     const UNICORN_DESCRIPTION = 'A description';
-    
-    let aws = null;
-    let lambda = null;
+
+    var aws = null;
+    var lambda = null;
 
     before(() => {
         process.env.TABLE_NAME = TABLE_NAME;
@@ -39,15 +39,15 @@ describe("Updating Unicorns", function () {
     });
 
     it("updates unicorn data", function (done) {
-        lambda.lambda_handler({ 
-            "resource": "unicorns", 
-            "httpMethod": "PUT", 
-            "pathParameters" : { 
-                "name" : UNICORN_NAME 
-            }, 
+        lambda.lambda_handler({
+            "resource": "unicorns",
+            "httpMethod": "PUT",
+            "pathParameters" : {
+                "name" : UNICORN_NAME
+            },
             "body": JSON.stringify({ "name": UNICORN_NAME, "breed": UNICORN_BREED, "description": UNICORN_DESCRIPTION })
-        }, 
-        {}, 
+        },
+        {},
         (err, response) => {
             // Check whether we received any error information
             assert.ifError(err);
