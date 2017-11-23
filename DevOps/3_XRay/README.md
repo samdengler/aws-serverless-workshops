@@ -490,7 +490,7 @@ The bug has been fixed and the API now responds without delay.  Let's use X-Ray 
 
 
 
-### Remediation Validation Using X-Ray
+### Validation Using X-Ray
 
 Lets see what the AWS X-Ray traces looks like now that you have removed the error and the delay.
 

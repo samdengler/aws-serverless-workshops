@@ -1,5 +1,3 @@
-<!-- $theme: default -->
-
 # Module 0: CodeStar Project
 
 In this module you'll use the [AWS CodeStar](https://aws.amazon.com/codestar/) service to create a project that will include:
@@ -31,7 +29,7 @@ This workshop can be deployed in any AWS region that supports the following serv
 - AWS Lambda
 - AWS X-Ray
 
-You can refer to the [region table](https://aws.amazon.com/about-aws/global-infrastructure/regional-product-services/) in the AWS documentation to see which regions have the supported services. Among the supported regions you can choose are N. Virginia, Ohio, N. California, Oregon, Ireland, Frankfurt, Singapore, and Sydney.
+You can refer to the [region table](https://aws.amazon.com/about-aws/global-infrastructure/regional-product-services/) in the AWS documentation to see which regions have the supported services. Among the supported regions you can choose are N. Virginia, Ohio, N. California, Oregon, Ireland, Frankfurt, and Sydney.
 
 Once you've chosen a region, you should deploy all of the resources for this workshop there. Make sure you select your region from the dropdown in the upper right corner of the AWS Console before getting started.
 
@@ -116,7 +114,7 @@ Congratulations!  You have successfully create a serverless web service project 
     
     ![CodeStar 11](images/codestar-11b.png)
     
-1. You can select instructions to clone the CodeCommit respository using **Visual Studio**, **Eclipse**, or **Command line tools**.  Click **See instructions** for instructions for cloning to **macOS**, **Windows**, and **Linux** operating systems.
+1. You can select instructions to clone the CodeCommit respository using **Visual Studio**, **Eclipse**, or **Command line tools**.  Click **See instructions** for instructions for cloning to **macOS**, **Windows**, and **Linux** operating systems.  Complete the instructions to clone the CodeCommit Git repository to your local workstation.
 
     ![CodeStar 12](images/codestar-12.png)
 

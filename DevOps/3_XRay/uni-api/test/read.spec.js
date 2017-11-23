@@ -16,6 +16,7 @@ describe("Reading Unicorns", function () {
         // Create a mock DDB backend
         aws = proxyquire(PATH_TO_MODULE_UNDER_TEST, {
             'aws-sdk' :{
+                "VERSION" : "2.155.0",
                 "DynamoDB": {
                     "DocumentClient": function() {
                         return {
