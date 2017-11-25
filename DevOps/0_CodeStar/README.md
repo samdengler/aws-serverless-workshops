@@ -29,11 +29,11 @@ This workshop can be deployed in any AWS region that supports the following serv
 - AWS Lambda
 - AWS X-Ray
 
-You can refer to the [region table](https://aws.amazon.com/about-aws/global-infrastructure/regional-product-services/) in the AWS documentation to see which regions have the supported services. Among the supported regions you can choose are N. Virginia, Ohio, N. California, Oregon, Ireland, Frankfurt, and Sydney.
+This workshop is available in the **Ireland** and **Sydney** regions.
+
 
 Once you've chosen a region, you should deploy all of the resources for this workshop there. Make sure you select your region from the dropdown in the upper right corner of the AWS Console before getting started.
 
-![Region selection screenshot](images/region-selection.png)
 
 ### 1. Create a CodeStar project
 

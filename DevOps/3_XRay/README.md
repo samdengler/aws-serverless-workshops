@@ -96,11 +96,7 @@ In order to tacke [Problem 1: Error Discovery Using X-Ray](#problem-1-error-disc
 
     Region| Launch
     ------|-----
-    US East (N. Virginia) | [![Launch Module 3 in us-east-1](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/images/cloudformation-launch-stack-button.png)](https://console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/create/review?stackName=Seed-3-XRay&templateURL=https://s3.amazonaws.com/fsd-aws-wildrydes-us-east-1/codestar-template.yml&param_sourceUrl=https://s3.amazonaws.com/fsd-aws-wildrydes-us-east-1/uni-api-3-v2.zip&param_targetProjectId=uni-api&param_targetProjectRegion=us-east-1)
-    US West (N. California) | [![Launch Module 3 in us-west-1](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/images/cloudformation-launch-stack-button.png)](https://console.aws.amazon.com/cloudformation/home?region=us-west-1#/stacks/create/review?stackName=Seed-3-XRay&templateURL=https://s3.amazonaws.com/fsd-aws-wildrydes-us-west-1/codestar-template.yml&param_sourceUrl=https://s3-us-west-1.amazonaws.com/fsd-aws-wildrydes-us-west-1/uni-api-3-v2.zip&param_targetProjectId=uni-api&param_targetProjectRegion=us-west-1)
-    US West (Oregon) | [![Launch Module 3 in us-west-2](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/images/cloudformation-launch-stack-button.png)](https://console.aws.amazon.com/cloudformation/home?region=us-west-2#/stacks/create/review?stackName=Seed-3-XRay&templateURL=https://s3.amazonaws.com/fsd-aws-wildrydes-us-west-2/codestar-template.yml&param_sourceUrl=https://s3-us-west-2.amazonaws.com/fsd-aws-wildrydes-us-west-2/uni-api-3-v2.zip&param_targetProjectId=uni-api&param_targetProjectRegion=us-west-2)
     EU (Ireland) | [![Launch Module 3 in eu-west-1](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/images/cloudformation-launch-stack-button.png)](https://console.aws.amazon.com/cloudformation/home?region=eu-west-1#/stacks/create/review?stackName=Seed-3-XRay&templateURL=https://s3.amazonaws.com/fsd-aws-wildrydes-eu-west-1/codestar-template.yml&param_sourceUrl=https://s3-eu-west-1.amazonaws.com/fsd-aws-wildrydes-eu-west-1/uni-api-3-v2.zip&param_targetProjectId=uni-api&param_targetProjectRegion=eu-west-1)
-    EU (Frankfurt) | [![Launch Module 3 in eu-central-1](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/images/cloudformation-launch-stack-button.png)](https://console.aws.amazon.com/cloudformation/home?region=eu-central-1#/stacks/create/review?stackName=Seed-3-XRay&templateURL=https://s3.amazonaws.com/fsd-aws-wildrydes-eu-central-1/codestar-template.yml&param_sourceUrl=https://s3-eu-central-1.amazonaws.com/fsd-aws-wildrydes-eu-central-1/uni-api-3-v2.zip&param_targetProjectId=uni-api&param_targetProjectRegion=eu-central-1)
     Asia Pacific (Sydney) | [![Launch Module 3 in ap-southeast-2](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/images/cloudformation-launch-stack-button.png)](https://console.aws.amazon.com/cloudformation/home?region=ap-southeast-2#/stacks/create/review?stackName=Seed-3-XRay&templateURL=https://s3.amazonaws.com/fsd-aws-wildrydes-ap-southeast-2/codestar-template.yml&param_sourceUrl=https://s3-ap-southeast-2.amazonaws.com/fsd-aws-wildrydes-ap-southeast-2/uni-api-3-v2.zip&param_targetProjectId=uni-api&param_targetProjectRegion=ap-southeast-2)
 
 
@@ -261,7 +257,7 @@ HOW TO fix the bug and push code changes (expand for details)
     ```
     docClient.scan(params, function(error, data) {
      // Comment or Delete the following line of code to remove simulated error
-     error = Error("something is wrong");
+     err = Error("something is wrong");
     ```
 
 1. Comment or delete this line to fix the code bug
@@ -275,14 +271,14 @@ HOW TO fix the bug and push code changes (expand for details)
 1. Using your Git client, add the local changes to the Git index, and commit with a message.  For example:
 
     ```
-    %> git add .
-    %> git commit -m "Fix bug"
+    git add -u
+    git commit -m "Fix bug"
     ```
 
 1. Using your Git client, push the Git repository updates to the origin.  For example:
 
     ```
-    %> git push origin
+    git push origin
     ```
 
 
@@ -384,7 +380,7 @@ HOW TO use AWS X-Ray to discover the performance delay (expand for details)
 
    ![Slow X-Ray trace](images/xray-trace-slow.png)
 
-1. On the **Trace Detail** page, note the **Timeline** of HTTP calls, originating with the API Gateway, but extending to other distributed systems traced by X-Ray.  The subsegment in the **Trace Detail** labeled **Return From Stable** has a long timeline indicating a 5 second execution time.  Since the developer used subsegments and labeled them, we can quickly finding the part of the code that is causing the delay.
+1. On the **Trace Detail** page, note the **Timeline** of HTTP calls, originating with the API Gateway, but extending to other distributed systems traced by X-Ray.  The subsegment in the **Trace Detail** labeled **Return From Stable** has a long timeline indicating a 5 second execution time.  Since the developer used subsegments and labeled them, we can quickly find the part of the code that is causing the delay.
 
    ![Trace Detail](images/xray-trace-delay.png)
 
@@ -428,14 +424,14 @@ HOW TO fix the code and push the code back up (expand for details)
 1. Using your Git client, add the local changes to the Git index, and commit with a message.  For example:
 
     ```bash
-    %> git add .
-    %> git commit -m "Remove delay"
+    git add -u
+    git commit -m "Remove delay"
     ```
 
 1. Using your Git client, push the Git repository updates to the origin.  For example:
 
     ```bash
-    %> git push origin
+    git push origin
     ```
 
 
