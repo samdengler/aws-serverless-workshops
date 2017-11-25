@@ -137,7 +137,7 @@ CodeStar generates IAM Roles and Policies that control access to AWS resources. 
 
     ![Policy Attached](images/role2-7.png)
     
-1. Update the allowed CloudFormation Resource pattern in the policy (substitute your AWS Region and AccountId) a click **Apply Policy**.
+1. Update the allowed CloudFormation Resource pattern in the policy (substitute your AWS Region and AccountId) a click **Save**.
         
     Before: `arn:aws:cloudformation:{region}:{accountId}:stack/awscodestar-uni-api-lambda/*`
     
