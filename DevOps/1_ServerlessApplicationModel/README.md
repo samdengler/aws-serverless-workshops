@@ -187,6 +187,14 @@ If you're unable to install SAM Local on your workstation, you may find it easie
 
 SAM Local can start an HTTP server locally on EC2 instance on port 3000.  In order to view content on that HTTP server through the browser on your laptop, you need to configure port forwarding.
 
+###### Port Forwarding on MacOS
+
+On your workstation, open a new terminal and run the following command.  In the command, replace ***~/mykeypair.pem*** with the location and file name of your .pem file and replace ***ec2-###-##-##-###.compute-1.amazonaws.com*** with the public DNS name of your EC2 developer instance:
+
+   ```
+   ssh -i ~/mykeypair.pem -N -L 3000:ec2-###-##-##-###.compute-1.amazonaws.com:3000 ec2-user@ec2-###-##-##-###.compute-1.amazonaws.com
+   ```
+
 ###### Port Forwarding with Putty on Windows
 
 1. In your putty configuration, select **Connection** , **SSH** , **Tunnels** and add a mapping:
@@ -233,6 +241,12 @@ In this section, you will use SAM Local on your workstation to run the Unicorn A
 
    ```bash
    sam local start-api
+   ```
+   
+   If port forwarding from an EC2 developer instance, run the following command:
+
+   ```bash
+   sam local start-api --host 0.0.0.0
    ```
 
    This will spawn a local API Gateway to test HTTP request/response functionality. Features hot-reloading to allow you to quickly develop, and iterate over your functions.  **`sam`** will automatically find any functions within your SAM template that have `Api` event sources defined, and mount them at the defined HTTP paths.
