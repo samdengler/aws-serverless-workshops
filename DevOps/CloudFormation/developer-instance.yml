@@ -16,6 +16,8 @@ Mappings:
   RegionMap:
     eu-west-1:
       amiId: "ami-7000b109"
+    ap-southeast-2:
+      amiId: "ami-2d5db74f"
 
 Resources:
   Ec2Instance:

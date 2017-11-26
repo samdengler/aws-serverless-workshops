@@ -166,37 +166,16 @@ If you're unable to install SAM Local on your workstation, you may find it easie
 
 1. [Create a keypair](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html), if you do not have one already.
 
-1. Launch an EC2 instance with:
-   * OS: Amazon Linux
-   * Public IP address
-   * Minimum size: t2.micro
-   * Security Group allows SSH access from your laptop
+1. To launch an EC2 instance with the required dependencies, click on the **Launch Stack** button for your region below.  You will need to select the keypair that you created in the previous step, as well as a VPC and Subnet for your EC2 instance:
 
-1. Once launched, use SSH client to connect to the instance.  If you are using Windows, use a client such as Putty or Bitvise (you can find instructions for connecting from Windows using Putty here: [Connecting to Your Linux Instance from Windows Using PuTTY](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/putty.html))
+    Region| Launch
+    ------|-----
+    EU (Ireland) | [![Launch Module 1 in eu-west-1](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/images/cloudformation-launch-stack-button.png)](https://console.aws.amazon.com/cloudformation/home?region=eu-west-1#/stacks/create/review?stackName=DeveloperInstance&templateURL=https://s3.amazonaws.com/fsd-aws-wildrydes-eu-west-1/developer-instance.yml)
+    Asia Pacific (Sydney) | [![Launch Module 1 in ap-southeast-2](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/images/cloudformation-launch-stack-button.png)](https://console.aws.amazon.com/cloudformation/home?region=ap-southeast-2#/stacks/create/review?stackName=DeveloperInstance&templateURL=https://s3.amazonaws.com/fsd-aws-wildrydes-ap-southeast-2/developer-instance.yml)
 
-1. Execute the command line below to install prerequisites and SAM Local:
-
-    ```bash
-    sudo yum install -y git docker & \
-    
-    sudo service docker start & \
-    
-    sudo chmod 666 /var/run/docker.sock & \
-    
-    curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.32.0/install.sh | bash & \
-    
-    . ~/.nvm/nvm.sh & \
-    
-    nvm install 6.11.4 & \
-    
-    npm install -g aws-sam-local    
-    ```
-
-1. Verify the installation worked:
-
-   ```bash
-   sam --version
-   ```
+1. Once the CloudFormation stack creation has completed, find the EC2 instance public DNS name by selecting the checkbox to the left **DeveloperInstance** Stack Name, and clicking the **Outputs** tab below the list of Stacks.  Find the output key labeled `PublicDnsName` and use the corresponding value in order to access the EC2 instance.
+ 
+1. use SSH client to connect to the instance.  If you are using Windows, use a client such as Putty or Bitvise (you can find instructions for connecting from Windows using Putty here: [Connecting to Your Linux Instance from Windows Using PuTTY](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/putty.html))
 
 
 ###### Setup Port Forwarding Configuration
