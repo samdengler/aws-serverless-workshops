@@ -60,7 +60,7 @@ Once you've chosen a region, you should deploy all of the resources for this wor
 
     ![CodeStar 4](images/codestar-4.png)
 
-1. Type `uni-api` as the **Project name** and click the **Next** button in the lower right corner of the browser window to proceed.
+1. Type `uni-api` as the **Project name**, select **AWS CodeCommit** as the repository, and click the **Next** button in the lower right corner of the browser window to proceed.
 
     ![CodeStar 5](images/codestar-5.png)
 
