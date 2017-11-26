@@ -1,8 +1,12 @@
 version: 0.1
 
 phases:
+  install:
+    commands:
+      - npm install -g mocha
   build:
     commands:
+      - npm install
       - cd app && npm install
       - cd int-test && npm install
       #
